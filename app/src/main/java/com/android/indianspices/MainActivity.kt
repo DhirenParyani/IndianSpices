@@ -15,6 +15,7 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.NetworkInfo
+import com.android.indianspices.user.activity.HomeScreenActivity
 
 
 class MainActivity : AppCompatActivity()
@@ -44,9 +45,14 @@ class MainActivity : AppCompatActivity()
                     startActivity(i)
                     finish()
                 }
+                else{
+                    val i = Intent(this, HomeScreenActivity::class.java)
+                    startActivity(i)
+                    finish()
+                }
 
             }
-        },4000)
+        },3000)
 
 
 
