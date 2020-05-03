@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.indianspices">
+    package="com.android.indianspices"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_splash_logo"
+        android:icon="@drawable/ic_splashscreen_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        tools:replace="android:icon,android:theme"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".user.activity.HomeScreenActivity"
             android:label="@string/title_activity_home_screen"></activity>
-        <activity android:name=".DashboardActivity" />
+
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
