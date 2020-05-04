@@ -36,6 +36,9 @@ class NotificationsFragment : Fragment()
         val databaseReference = FirebaseDatabase.getInstance().getReference("users")
        val userId=FirebaseAuth.getInstance().uid
         val logoutButton:Button=root.findViewById(R.id.logoutButton)
+        val textHeader:TextView=root.findViewById(R.id.text_header)
+
+
         logoutButton.setOnClickListener { _->
             FirebaseAuth.getInstance().signOut()
             val i = Intent(activity, LoginActivity::class.java)
@@ -52,9 +55,8 @@ class NotificationsFragment : Fragment()
                    //val user= child.getValuevalue<User>()
                    if(user!=null && user?.userId.equals(userId))
                    {
-                       nameText.text=user?.name
-                       phoneText.text=user?.phone
-                       emailText.text=user?.email
+                       textHeader.text="Hello,"+" "+user.name
+
                    }
                }
 

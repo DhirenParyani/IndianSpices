@@ -15,6 +15,7 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.NetworkInfo
+import android.widget.Toast
 import com.android.indianspices.user.activity.HomeScreenActivity
 
 
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity()
             }
             else
             {
+                Toast.makeText(this,"Check your connection!!",Toast.LENGTH_SHORT).show()
                 return false
             }
         }

@@ -3,62 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background_login">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/text_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_notifications" />
-
-    <TextView
-        android:id="@+id/emailText"
+    <Button
+        android:id="@+id/your_favorites_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="176dp"
-        android:text="TextView"
+        android:layout_marginTop="156dp"
+        android:background="@drawable/button_style"
+        android:text="Your Favorites"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nameText" />
+        app:layout_constraintTop_toBottomOf="@+id/text_header" />
 
-    <TextView
-        android:id="@+id/phoneText"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/current_orders_button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="187dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginEnd="165dp"
-        android:text="TextView"
+        android:background="@drawable/button_style"
+        android:text="Current Orders"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/emailText" />
+        app:layout_constraintTop_toBottomOf="@+id/your_favorites_button" />
+
+    <Button
+        android:id="@+id/past_orders_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="Past Orders"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_orders_button" />
+
+    <Button
+        android:id="@+id/edit_account_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="Edit Account"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/past_orders_button" />
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="Logout"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_style"
+        android:text="Sign Out"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneText" />
+        app:layout_constraintTop_toBottomOf="@id/edit_account_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.android.indianspices.user.activity.ui.menu
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,22 +13,20 @@ import com.android.indianspices.R
 import com.android.indianspices.database.AppDatabase
 import com.android.indianspices.model.Food
 import com.android.indianspices.model.Orders
-import com.android.indianspices.user.activity.ui.home.MenuViewModel
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_food_detail.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class FoodDetailFragment : Fragment()
 {
+
+
 
 
 
@@ -56,8 +53,10 @@ class FoodDetailFragment : Fragment()
         var foodPrice:TextView=root.findViewById(R.id.foodPriceText)
         var btnCart:FloatingActionButton=root.findViewById(R.id.btnCart)
         var foodQuantity:ElegantNumberButton=root.findViewById(R.id.foodQuantity)
+        var toolbar:androidx.appcompat.widget.Toolbar=root.findViewById(R.id.toolbar)
 
         var currFood:Food=Food()
+
 
 
         val postListener=object : ValueEventListener
@@ -81,6 +80,10 @@ class FoodDetailFragment : Fragment()
         }
         }
 
+        toolbar.setNavigationOnClickListener(View.OnClickListener { view->
+            activity?.onBackPressed()
+        })
+
 
         btnCart.setOnClickListener(View.OnClickListener {
         GlobalScope.launch {
@@ -99,5 +102,16 @@ class FoodDetailFragment : Fragment()
 
                 return root
     }
+
+
+
+
+
+
+
+
+
+
+
 
 }
