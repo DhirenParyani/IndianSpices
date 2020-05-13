@@ -35,4 +35,9 @@
         android:id="@+id/navigation_view_orders"
         android:name="com.android.indianspices.user.activity.ui.notifications.ViewOrderFragment"
         android:label="fragment_view_order" />
+    <fragment
+        android:id="@+id/navigation_profile_update"
+        android:name="com.android.indianspices.user.activity.ui.notifications.UpdateProfileFragment"
+        android:label="fragment_update_profile"
+        tools:layout="@layout/fragment_update_profile" />
 </navigation>
