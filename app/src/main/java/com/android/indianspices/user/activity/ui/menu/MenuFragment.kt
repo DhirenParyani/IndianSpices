@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener
 class MenuFragment : Fragment()
 {
 
-    private lateinit var menuViewModel: MenuViewModel
+
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
@@ -33,8 +33,7 @@ class MenuFragment : Fragment()
         savedInstanceState: Bundle?
     ): View?
     {
-        menuViewModel =
-            ViewModelProviders.of(this).get(MenuViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_menu, container, false)
         val databaseReference = FirebaseDatabase.getInstance().getReference("Foods")
         var foodList=ArrayList<Food>()

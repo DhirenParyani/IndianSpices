@@ -1,28 +1,34 @@
 package com.android.indianspices.model
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 class Request
 {
+
+    var requestID:String?=null
     var name:String?=null
     var phone:String?=null
-    var address:String?=null
-    var pincode:String?=null
     var total:String?=null
+    var dateTime:String?=null
     var orders:List<Orders>?=null
+    var status:String?=null
 
     constructor()
 
-    constructor(userName:String?,userPhone:String?,userAddress:String?,userPinCode:String?,total:String?,foodOrders:List<Orders>?)
+    constructor(userName:String?,userPhone:String?,total:String?,foodOrders:List<Orders>?,dateTime:String?,status:String?)
     {
+
         this.name=userName
         this.phone=userPhone
-        this.address=userAddress
-        this.pincode=userPinCode
         this.total=total
         this.orders=foodOrders
-
-
+        this.dateTime= dateTime
+        this.status=status
 
     }
+
+
 
 
 }

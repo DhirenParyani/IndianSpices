@@ -87,7 +87,7 @@ class FoodDetailFragment : Fragment()
 
         btnCart.setOnClickListener(View.OnClickListener {
         GlobalScope.launch {
-            val currentOrderObj=Orders(currFood.id,foodQuantity.number,currFood.price)
+            val currentOrderObj=Orders(currFood.id,currFood.name,foodQuantity.number,currFood.price)
             val db = AppDatabase.getInstance(root.context)
             val databaseAccess = db?.orderDao()
             databaseAccess?.insertAll(currentOrderObj)

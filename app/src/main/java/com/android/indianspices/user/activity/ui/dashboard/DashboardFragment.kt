@@ -22,6 +22,9 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DashboardFragment : Fragment()
@@ -101,11 +104,14 @@ class DashboardFragment : Fragment()
                 {
                     override fun onDataChange(dataSnapshot: DataSnapshot)
                     {
+
                         var user = dataSnapshot.getValue(User::class.java)
                         var request=Request()
                         if(user!=null)
                         {
-                             request = Request(user.name, user.phone,editAddress.text.toString(),editPinCode.text.toString(),totalValue.text.toString(),foodCartList)
+                            var status="0"
+                             request = Request(user.name, user.phone,totalValue.text.toString(),foodCartList,
+                                 SimpleDateFormat("dd-MMM-YYYY HH:mm:sss").format(Date()),status)
                         }
 
                         databaseReferenceToRequest.child(System.currentTimeMillis().toString()).setValue(request)

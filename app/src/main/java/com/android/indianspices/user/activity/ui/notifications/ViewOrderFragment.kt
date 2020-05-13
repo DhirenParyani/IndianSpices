@@ -7,71 +7,83 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.android.indianspices.R
-
+import com.android.indianspices.adapter.FoodListAdapter
+import com.android.indianspices.adapter.ViewOrderAdapter
+import com.android.indianspices.model.Food
+import com.android.indianspices.model.Request
+import com.android.indianspices.model.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_home_screen.*
 
 
 class ViewOrderFragment : Fragment()
 {
-    // TODO: Rename and change types of parameters
-
-    private var listener: OnFragmentInteractionListener? = null
-
-    override fun onCreate(savedInstanceState: Bundle?)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?
     {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
+
+        val root = inflater.inflate(R.layout.fragment_view_order, container, false)
+        val databaseReferenceToRequest = FirebaseDatabase.getInstance().getReference("Requests")
+        var firebaseAuth=FirebaseAuth.getInstance()
+        var user=firebaseAuth.currentUser
+        var phoneNumber=user?.uid
+        if(this.arguments!=null)
+        {
+            phoneNumber=arguments!!.getString("phoneNumber")
+
 
         }
-    }
+        var allOrders=ArrayList<Request>()
+        val requestListRecyclerView:RecyclerView=root.findViewById(R.id.viewOrder_recycler)
+        requestListRecyclerView.layoutManager=  LinearLayoutManager(this.activity,LinearLayoutManager.VERTICAL,false)
+        var requestListAdapter=ViewOrderAdapter(allOrders)
+        requestListRecyclerView.adapter=requestListAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View?
-    {
-        // Inflate the layout for this fragment
+        val postListener=object : ValueEventListener
+        {
+            override fun onDataChange(dataSnapshot: DataSnapshot)
+            {
+                for (child in dataSnapshot.children)
+                {
+                    val request = child.getValue(Request::class.java)
 
 
-        val root= inflater.inflate(R.layout.fragment_view_order, container, false)
+                    if(request!=null)
+                    {
+                        request.requestID=child.key
+                        allOrders.add(request)
+                    }
+
+
+                    requestListAdapter.notifyDataSetChanged()
+
+                }
+
+            }
+                override fun onCancelled(databaseError: DatabaseError)
+                {
+
+                }
+
+        }
+        databaseReferenceToRequest.orderByChild("phone").equalTo(phoneNumber).addListenerForSingleValueEvent(postListener)
+
+
 
 
 
         return root
-
-
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri)
-    {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context)
-    {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener)
-        {
-            listener = context
-        }
-        else
-        {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach()
-    {
-        super.onDetach()
-        listener = null
-    }
-
-
-
-    interface OnFragmentInteractionListener
-    {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
 
 }

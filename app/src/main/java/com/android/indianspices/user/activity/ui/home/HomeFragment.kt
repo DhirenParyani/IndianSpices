@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener
 class HomeFragment : Fragment()
 {
 
-    private lateinit var menuViewModel: MenuViewModel
+
     private lateinit var firebaseAuth: FirebaseAuth
     lateinit var categoryListView:RecyclerView
     override fun onCreateView(
@@ -32,8 +32,7 @@ class HomeFragment : Fragment()
         savedInstanceState: Bundle?
     ): View?
     {
-        menuViewModel =
-            ViewModelProviders.of(this).get(MenuViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         firebaseAuth=FirebaseAuth.getInstance()

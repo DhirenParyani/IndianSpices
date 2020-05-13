@@ -34,6 +34,5 @@
     <fragment
         android:id="@+id/navigation_view_orders"
         android:name="com.android.indianspices.user.activity.ui.notifications.ViewOrderFragment"
-        android:label="fragment_view_order"
-        tools:layout="@layout/fragment_view_order" />
+        android:label="fragment_view_order" />
 </navigation>
