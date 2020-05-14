@@ -78,7 +78,7 @@ import androidx.navigation.ui.NavigationUI
             menuFragment.arguments=bundle
             var fragmentTransaction:FragmentTransaction= (view?.context as HomeScreenActivity).supportFragmentManager.beginTransaction().replace(R.id.fragment_home,menuFragment)
             fragmentTransaction.commit()*/
-           val onCategoryClick= HomeFragmentDirections.onCategoryClick()
+           val onCategoryClick= HomeFragmentDirections.onCategoryClick(position)
             onCategoryClick.setCategoryID(position)
             Navigation.findNavController(view).navigate(onCategoryClick)
 

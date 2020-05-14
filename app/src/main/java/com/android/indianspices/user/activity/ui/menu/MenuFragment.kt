@@ -43,11 +43,16 @@ class MenuFragment : Fragment()
         foodListRecyclerView.adapter=foodListAdapter
         var isArgumentPresent=false
         var position:Int=0
-        if(this.arguments!=null)
+       /* if(this.arguments!=null)
         {
             position=arguments!!.getInt("position")
             isArgumentPresent=true
 
+        }*/
+        arguments?.let {
+            val safeargs=MenuFragmentArgs.fromBundle(it)
+            position=safeargs.categoryID
+            isArgumentPresent=true
         }
 
         val postListener=object : ValueEventListener

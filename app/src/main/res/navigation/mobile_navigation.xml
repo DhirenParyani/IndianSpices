@@ -36,8 +36,7 @@
         android:label="@string/title_menu">
         <argument
             android:name="categoryID"
-            app:argType="integer"
-            android:defaultValue="0" />
+            app:argType="integer" />
         <action
             android:id="@+id/onFoodClick"
             app:destination="@id/navigation_food_detail" />
