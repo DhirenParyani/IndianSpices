@@ -100,9 +100,13 @@
                 <ListView
                     android:id="@+id/foodrequested_list"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:scrollbarSize="3dp"
+                    android:scrollbarStyle="outsideOverlay"
                     android:scrollbars="vertical"
+                    android:scrollingCache="true"
+                    android:smoothScrollbar="true"
                     android:visibility="invisible" />
 
             </LinearLayout>

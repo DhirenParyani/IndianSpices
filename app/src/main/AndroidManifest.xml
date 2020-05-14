@@ -17,14 +17,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".user.activity.HomeScreenActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_home_screen"></activity>
 
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait"  android:theme="@style/FullscreenTheme" />
+        <activity android:name=".SignUpActivity" android:screenOrientation="portrait"  android:theme="@style/FullscreenTheme"/>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

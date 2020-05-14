@@ -71,6 +71,7 @@ class  ViewOrderAdapter(private  var viewOrderList:List<Request> ): RecyclerView
                 holder.requestedFood.visibility=View.VISIBLE
                 holder.requestedFood.adapter =
                     ArrayAdapter(view.context, android.R.layout.simple_list_item_1,orders)
+
                 if(!request.orders.isNullOrEmpty())
                 {
                     orders.clear()
@@ -78,6 +79,7 @@ class  ViewOrderAdapter(private  var viewOrderList:List<Request> ): RecyclerView
 
                     GlobalScope.launch(Dispatchers.Main) {
                         var adapter = holder.requestedFood.adapter as? ArrayAdapter<Orders>
+                        holder.requestedFood.layoutParams.height=orders.size*200
                         adapter?.notifyDataSetChanged()
                     }
 

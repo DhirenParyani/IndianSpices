@@ -68,9 +68,6 @@ class FoodDetailFragment : Fragment()
                 Picasso.get().load(food!!.image).error(R.drawable.chef_image).placeholder(R.drawable.chef_image).into(foodImage)
                 foodPrice.text=food.price
                 foodName.text=food.name
-
-                //val OrderObj=Orders(food.id?:null,foodQuantity.number?:null)
-
                currFood= food
 
 

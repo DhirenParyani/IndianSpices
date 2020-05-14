@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.android.indianspices.common.Constants
 import com.android.indianspices.model.User
 import com.android.indianspices.user.activity.HomeScreenActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -31,7 +32,7 @@ class LoginActivity : AppCompatActivity()
 
             if(!loginEmailAddressText.text.toString().isNullOrEmpty() && !loginPasswordText.text.toString().isNullOrEmpty())
             {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(loginEmailAddressText.text.toString(), loginPasswordText.getText().toString())
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(loginEmailAddressText.text.toString(), loginPasswordText.text.toString())
                     .addOnCompleteListener(this) {task->
                         if(task.isSuccessful)
                         {
@@ -45,11 +46,14 @@ class LoginActivity : AppCompatActivity()
 
                                     if (user != null && user?.role.equals("normal"))
                                     {
+                                        Constants.username=user.name
+                                        Constants.userphone=user.phone
+                                        Constants.userEmail=user.email
                                         openHomeScreen()
 
                                     }
                                     else{
-
+                                        openVendorHomeScreen()
                                     }
 
 
@@ -86,5 +90,12 @@ class LoginActivity : AppCompatActivity()
         finish()
 
 
+    }
+
+    fun openVendorHomeScreen()
+    {
+//        //var intent=Intent(this,VendorHomeScreenActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

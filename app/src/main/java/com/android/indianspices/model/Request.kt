@@ -12,11 +12,12 @@ class Request
     var total:String?=null
     var dateTime:String?=null
     var orders:List<Orders>?=null
+    var paymentState:String?=null
     var status:String?=null
 
     constructor()
 
-    constructor(userName:String?,userPhone:String?,total:String?,foodOrders:List<Orders>?,dateTime:String?,status:String?)
+    constructor(userName:String?,userPhone:String?,total:String?,foodOrders:List<Orders>?,dateTime:String?,status:String?,paymentState:String?)
     {
 
         this.name=userName
@@ -25,6 +26,7 @@ class Request
         this.orders=foodOrders
         this.dateTime= dateTime
         this.status=status
+        this.paymentState=paymentState
 
     }
 

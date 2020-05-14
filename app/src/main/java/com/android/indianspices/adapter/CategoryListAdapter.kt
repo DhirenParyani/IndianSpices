@@ -9,14 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.Navigation
+
 import androidx.recyclerview.widget.RecyclerView
 
 import com.android.indianspices.R
 import com.android.indianspices.model.FoodCategory
 import com.android.indianspices.user.activity.HomeScreenActivity
-import com.android.indianspices.user.activity.ui.home.MenuFragment
+import com.android.indianspices.user.activity.ui.home.HomeFragmentDirections
 import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.squareup.picasso.Picasso
 
@@ -70,13 +70,18 @@ class  CategoryListAdapter(private  var categoryList:List<FoodCategory> ): Recyc
 
         holder.categoryThumbnail.setOnClickListener(View.OnClickListener {view->
 
-            var bundle:Bundle= Bundle()
-            bundle.putInt("position",position)
+            /*var bundle:Bundle= Bundle()
+            bundle.putInt("position",position)mentTransaction
+import androidx.navigation.ui.NavigationUI
 
             var menuFragment:MenuFragment= MenuFragment()
             menuFragment.arguments=bundle
             var fragmentTransaction:FragmentTransaction= (view?.context as HomeScreenActivity).supportFragmentManager.beginTransaction().replace(R.id.fragment_home,menuFragment)
-            fragmentTransaction.commit()
+            fragmentTransaction.commit()*/
+           val onCategoryClick= HomeFragmentDirections.onCategoryClick("")
+            onCategoryClick.setCategoryID(position.toString())
+            Navigation.findNavController(view).navigate(onCategoryClick)
+
 
 
 

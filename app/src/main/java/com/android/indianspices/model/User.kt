@@ -19,7 +19,7 @@ class User
         this.phone=phone
         this.email=email
         this.password=password
-        this.role=password
+        this.role="normal"
 
     }
     constructor()

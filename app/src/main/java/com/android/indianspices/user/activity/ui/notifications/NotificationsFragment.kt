@@ -12,10 +12,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.android.indianspices.LoginActivity
 import com.android.indianspices.R
 import com.android.indianspices.model.User
 import com.android.indianspices.user.activity.HomeScreenActivity
+import com.android.indianspices.user.activity.ui.home.HomeFragmentDirections
 import com.android.indianspices.user.activity.ui.menu.FoodDetailFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -41,19 +43,25 @@ class NotificationsFragment : Fragment()
         val logoutButton: Button = root.findViewById(R.id.logoutButton)
         val textHeader: TextView = root.findViewById(R.id.text_header)
         val currentOrdersButton: Button = root.findViewById(R.id.current_orders_button)
+        val updateProfileButton:Button=root.findViewById(R.id.edit_account_button)
         var phoneNumber:String?=null
 
         currentOrdersButton.setOnClickListener { view ->
-                var viewOrderFragment: ViewOrderFragment = ViewOrderFragment()
-                var bundle: Bundle = Bundle()
-                bundle.putString("phoneNumber",phoneNumber)
-                viewOrderFragment.arguments=bundle
-                var fragmentTransaction: FragmentTransaction =
-                    (view.context as HomeScreenActivity).supportFragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, viewOrderFragment)
-                fragmentTransaction.commit()
+
+           val onViewOrderCheck= NotificationsFragmentDirections.actionNavigationNotificationsToNavigationViewOrders()
+            onViewOrderCheck.setPhoneNumber(phoneNumber.toString())
+            Navigation.findNavController(view).navigate(onViewOrderCheck)
 
 
+        }
+        updateProfileButton.setOnClickListener { view ->
+            /*var updateProfileFragment: UpdateProfileFragment = UpdateProfileFragment()
+
+            var fragmentTransaction: FragmentTransaction =
+                (view.context as HomeScreenActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment, updateProfileFragment)
+            fragmentTransaction.commit()*/
+            Navigation.findNavController(view).navigate(R.id.navigation_profile_update)
         }
 
             logoutButton.setOnClickListener { _ ->

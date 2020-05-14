@@ -1,4 +1,4 @@
-package com.android.indianspices.user.activity.ui.home
+package com.android.indianspices.user.activity.ui.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -45,7 +45,7 @@ class MenuFragment : Fragment()
         var position:Int=0
         if(this.arguments!=null)
         {
-            position=arguments!!.getInt("position")
+            position=arguments!!.getString("position")!!.toInt()
             isArgumentPresent=true
 
         }

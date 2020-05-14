@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.android.indianspices.R
 import com.android.indianspices.model.Food
 import com.android.indianspices.user.activity.HomeScreenActivity
-import com.android.indianspices.user.activity.ui.home.MenuFragment
+import com.android.indianspices.user.activity.ui.home.HomeFragmentDirections
 import com.android.indianspices.user.activity.ui.menu.FoodDetailFragment
+import com.android.indianspices.user.activity.ui.menu.MenuFragmentDirections
 import com.squareup.picasso.Picasso
 
 
@@ -55,13 +57,16 @@ class  FoodListAdapter(private  var foodList:List<Food> ): RecyclerView.Adapter<
 
         holder.foodThumbnail.setOnClickListener(View.OnClickListener {view->
 
-            var bundle: Bundle = Bundle()
+            /*var bundle: Bundle = Bundle()
             bundle.putString("foodId",food.id)
 
             var foodDetailFragment: FoodDetailFragment = FoodDetailFragment()
             foodDetailFragment.arguments=bundle
             var fragmentTransaction: FragmentTransaction = (view?.context as HomeScreenActivity).supportFragmentManager.beginTransaction().replace(R.id.fragment_menu,foodDetailFragment)
-            fragmentTransaction.commit()
+            fragmentTransaction.commit()*/
+            val onFoodClick= MenuFragmentDirections.onFoodClick()
+            onFoodClick.setFoodId(food.id.toString())
+            Navigation.findNavController(view).navigate(onFoodClick)
 
 
 

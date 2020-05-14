@@ -36,13 +36,7 @@ class HomeFragment : Fragment()
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         firebaseAuth=FirebaseAuth.getInstance()
-       /* val welcomeext:TextView=root.findViewById(R.id.welcomeText)
-        welcomeext.text="Hello"+" "+firebaseAuth.uid*/
-        /*val logoutButton: Button = root.findViewById(R.id.logOut)
-        logoutButton.setOnClickListener { _->
-            firebaseAuth.signOut()
 
-        }*/
         var categoryList=ArrayList<FoodCategory>()
 
 
@@ -64,8 +58,6 @@ class HomeFragment : Fragment()
 
                     categoryList.add(food!!)
 
-                    //val user= child.getValuevalue<User>()
-
 
                 }
 
@@ -83,6 +75,11 @@ class HomeFragment : Fragment()
 
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?)
+    {
+        super.onViewCreated(view, savedInstanceState)
     }
 
 
