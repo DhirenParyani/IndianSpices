@@ -45,7 +45,7 @@ class MenuFragment : Fragment()
         var position:Int=0
         if(this.arguments!=null)
         {
-            position=arguments!!.getString("position")!!.toInt()
+            position=arguments!!.getInt("position")
             isArgumentPresent=true
 
         }
