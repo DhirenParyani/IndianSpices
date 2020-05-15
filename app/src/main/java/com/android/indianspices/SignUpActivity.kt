@@ -3,8 +3,10 @@ package com.android.indianspices
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import com.android.indianspices.model.User
+import com.android.indianspices.user.activity.HomeScreenActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -21,7 +23,42 @@ class SignUpActivity : AppCompatActivity()
         setContentView(R.layout.activity_sign_up)
         mAuth = FirebaseAuth.getInstance()
         createAccountButton.setOnClickListener { _->
-            registerUser()
+            if(textName.text?.trim().toString().isNullOrEmpty())
+            {
+                textName.error="Name can't be empty"
+                textName.requestFocus()
+            }
+
+            else if(textNumber.text?.trim().toString().isNullOrEmpty())
+            {
+                textNumber.error = "Number cannot be empty"
+                textNumber.requestFocus()
+            }
+            else if(textEmail.text?.trim().toString().isNullOrEmpty())
+            {
+                textEmail.error = "Number cannot be empty"
+                textEmail.requestFocus()
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail.text?.trim()).matches()) {
+                textEmail.error="Invalid Email"
+                textEmail.requestFocus()
+            }
+            else if (textPassword.text?.trim().toString().length < 6) {
+                textPassword.setError("Password should be greater than or equal to 6 characters");
+                textPassword.requestFocus();
+
+            }
+            else if (textNumber.text?.trim().toString().length < 10) {
+                textPassword.setError("Phone number cannot be less than 10 digits");
+                textPassword.requestFocus();
+
+            }
+            else registerUser()
+        }
+        backToLoginButton.setOnClickListener { _ ->
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
@@ -32,6 +69,8 @@ class SignUpActivity : AppCompatActivity()
         val phone=textNumber.text?.trim().toString()
         val email=textEmail.text?.trim().toString()
         val password=textPassword.text?.trim().toString()
+
+
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
 
                 task->

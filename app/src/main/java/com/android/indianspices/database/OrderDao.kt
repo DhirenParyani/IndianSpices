@@ -12,4 +12,5 @@ interface OrderDao
     @Delete fun delete(order:Orders)
     @Query("DELETE FROM ORDER_DETAIL") fun deleteAll()
 
+
 }

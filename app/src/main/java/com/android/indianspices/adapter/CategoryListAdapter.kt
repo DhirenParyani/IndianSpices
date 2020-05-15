@@ -63,23 +63,20 @@ class  CategoryListAdapter(private  var categoryList:List<FoodCategory> ): Recyc
     override fun onBindViewHolder(holder: CategoryListViewHolder, position: Int)
     {
         val category = categoryList[position]
-        Picasso.get().load(category.image).error(R.drawable.chef_image)
-            .placeholder(R.drawable.chef_image).into(holder.categoryThumbnail)
-        holder.categoryName.text = category.name
+        if(!category.image.isNullOrEmpty())
+        {
+            Picasso.get().load(category.image).error(R.drawable.chef_image)
+                .placeholder(R.drawable.chef_image).into(holder.categoryThumbnail)
+            holder.categoryName.text = category.name
+        }
+        else  Picasso.get().load(R.drawable.chef_image).into(holder.categoryThumbnail)
 
 
         holder.categoryThumbnail.setOnClickListener(View.OnClickListener {view->
 
-            /*var bundle:Bundle= Bundle()
-            bundle.putInt("position",position)mentTransaction
-import androidx.navigation.ui.NavigationUI
 
-            var menuFragment:MenuFragment= MenuFragment()
-            menuFragment.arguments=bundle
-            var fragmentTransaction:FragmentTransaction= (view?.context as HomeScreenActivity).supportFragmentManager.beginTransaction().replace(R.id.fragment_home,menuFragment)
-            fragmentTransaction.commit()*/
            val onCategoryClick= HomeFragmentDirections.onCategoryClick(position)
-            onCategoryClick.setCategoryID(position)
+                onCategoryClick.setCategoryID(position)
             Navigation.findNavController(view).navigate(onCategoryClick)
 
 

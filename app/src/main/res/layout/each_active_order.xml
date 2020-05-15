@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/viewAllOrders"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:layout_marginBottom="3dp"
+    android:padding="3dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:layout_constraintCircleRadius="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/custom_border"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderNumberLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/orderNumberLabel" />
+
+            <TextView
+                android:id="@+id/orderNumberField"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="textView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderUserNameLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/orderUserNameLabel" />
+
+            <TextView
+                android:id="@+id/orderUserNameField"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="TextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderDateLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/orderDateLabel" />
+
+            <TextView
+                android:id="@+id/orderDateField"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="TextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/allFoodsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/custom_border"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderedFoodLabel"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:text="@string/orderedFoodLabel" />
+
+            <ListView
+                android:id="@+id/allFoods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totalBillLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/totalBillLabel" />
+
+            <TextView
+                android:id="@+id/totalBillField"
+                android:layout_width="match_parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_height="match_parent"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/orderStatusLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/orderStatusLabel" />
+
+            <RadioGroup
+                android:id="@+id/orderStatusRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/orderPlacedRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/orderPlacedRadioBtn" />
+
+                <RadioButton
+                    android:id="@+id/orderPreparingRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/orderPreparingRadioBtn" />
+
+                <RadioButton
+                    android:id="@+id/orderCompletedRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/orderCompletedRadioBtn" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/updateStatusBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/updateStatusBtn" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

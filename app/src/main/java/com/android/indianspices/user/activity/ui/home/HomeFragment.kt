@@ -41,7 +41,7 @@ class HomeFragment : Fragment()
 
 
         val categoryListView:RecyclerView=root.findViewById(R.id.recycler_category)
-        categoryListView.layoutManager= LinearLayoutManager(this.activity,LinearLayoutManager.HORIZONTAL,false)
+        categoryListView.layoutManager= LinearLayoutManager(this.activity,LinearLayoutManager.VERTICAL,false)
         var categoryListAdapter=CategoryListAdapter(categoryList)
         categoryListView.adapter=categoryListAdapter
 

@@ -27,16 +27,13 @@ class FoodDetailFragment : Fragment()
 {
 
 
-
-
-
-
-    override fun onCreateView(
+   override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View?
     {
+        retainInstance=true
         val root = inflater.inflate(R.layout.fragment_food_detail, container, false)
         val databaseReference = FirebaseDatabase.getInstance().getReference("Foods")
         var isArgumentPresent=false
@@ -54,6 +51,7 @@ class FoodDetailFragment : Fragment()
         var btnCart:FloatingActionButton=root.findViewById(R.id.btnCart)
         var foodQuantity:ElegantNumberButton=root.findViewById(R.id.foodQuantity)
         var toolbar:androidx.appcompat.widget.Toolbar=root.findViewById(R.id.toolbar)
+        var fooddescription:TextView=root.findViewById(R.id.food_description)
 
         var currFood:Food=Food()
 
@@ -68,6 +66,7 @@ class FoodDetailFragment : Fragment()
                 Picasso.get().load(food!!.image).error(R.drawable.chef_image).placeholder(R.drawable.chef_image).into(foodImage)
                 foodPrice.text=food.price
                 foodName.text=food.name
+                fooddescription.text=food.description
                currFood= food
 
 
@@ -84,7 +83,8 @@ class FoodDetailFragment : Fragment()
 
         btnCart.setOnClickListener(View.OnClickListener {
         GlobalScope.launch {
-            val currentOrderObj=Orders(currFood.id,currFood.name,foodQuantity.number,currFood.price)
+
+            val currentOrderObj=Orders(currFood!!.id!!,currFood!!.name!!,foodQuantity.number,currFood.price)
             val db = AppDatabase.getInstance(root.context)
             val databaseAccess = db?.orderDao()
             databaseAccess?.insertAll(currentOrderObj)

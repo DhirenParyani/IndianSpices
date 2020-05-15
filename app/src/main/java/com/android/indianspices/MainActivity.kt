@@ -16,7 +16,14 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.NetworkInfo
 import android.widget.Toast
+import com.android.indianspices.common.Constants
+import com.android.indianspices.model.User
 import com.android.indianspices.user.activity.HomeScreenActivity
+import com.android.indianspices.user.activity.VendorHomeScreenActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class MainActivity : AppCompatActivity()
@@ -36,6 +43,7 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
         auth =FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser()
+        val databaseReference = FirebaseDatabase.getInstance().getReference("users")
         splashScreen.postDelayed(Runnable { ->
             if (isMobileDataEnabled())
             {
@@ -47,9 +55,38 @@ class MainActivity : AppCompatActivity()
                     finish()
                 }
                 else{
-                    val i = Intent(this, HomeScreenActivity::class.java)
-                    startActivity(i)
-                    finish()
+
+                                        val postListener = object : ValueEventListener
+                                        {
+                                            override fun onDataChange(dataSnapshot: DataSnapshot)
+                                            {
+
+                                                val user = dataSnapshot.getValue(User::class.java)
+
+                                                if (user != null && user?.role.equals("normal"))
+                                                {
+                                                    Constants.username=user.name
+                                                    Constants.userphone=user.phone
+                                                    Constants.userEmail=user.email
+                                                    openHomeScreen()
+
+                                                }
+                                                else{
+                                                    openVendorHomeScreen()
+                                                }
+
+
+                                            }
+
+
+                                            override fun onCancelled(databaseError: DatabaseError)
+                                            {
+
+                                            }
+                                        }
+
+                                        databaseReference.child(user!!.uid).addListenerForSingleValueEvent(postListener)
+
                 }
 
             }
@@ -57,6 +94,22 @@ class MainActivity : AppCompatActivity()
 
 
 
+    }
+
+    public fun openHomeScreen()
+{
+    var intent=Intent(this,HomeScreenActivity::class.java)
+    startActivity(intent)
+    finish()
+
+
+}
+
+    fun openVendorHomeScreen()
+    {
+        var intent=Intent(this, VendorHomeScreenActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
         fun isMobileDataEnabled():Boolean

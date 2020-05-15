@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.android.indianspices.R
-import com.android.indianspices.adapter.CategoryListAdapter
 import com.android.indianspices.adapter.FoodListAdapter
 import com.android.indianspices.model.Food
 import com.android.indianspices.model.FoodCategory
@@ -33,12 +31,15 @@ class MenuFragment : Fragment()
         savedInstanceState: Bundle?
     ): View?
     {
+        retainInstance=true
 
         val root = inflater.inflate(R.layout.fragment_menu, container, false)
-        val databaseReference = FirebaseDatabase.getInstance().getReference("Foods")
+        val databaseReferenceToFoods = FirebaseDatabase.getInstance().getReference("Foods")
+        val databaseReferenceToCategory = FirebaseDatabase.getInstance().getReference("Category")
+        val menuHeader:TextView=root.findViewById(R.id.menu_heading)
         var foodList=ArrayList<Food>()
         val foodListRecyclerView:RecyclerView=root.findViewById(R.id.recycler_foodList)
-        foodListRecyclerView.layoutManager= StaggeredGridLayoutManager(2,LinearLayoutManager.HORIZONTAL)
+        foodListRecyclerView.layoutManager= LinearLayoutManager(this.activity,LinearLayoutManager.VERTICAL,false)
         var foodListAdapter=FoodListAdapter(foodList)
         foodListRecyclerView.adapter=foodListAdapter
         var isArgumentPresent=false
@@ -53,6 +54,25 @@ class MenuFragment : Fragment()
             val safeargs=MenuFragmentArgs.fromBundle(it)
             position=safeargs.categoryID
             isArgumentPresent=true
+            val postListener=object : ValueEventListener
+            {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+
+                val category=dataSnapshot.getValue(FoodCategory::class.java)
+
+                    menuHeader.text=category?.name
+
+                }
+
+
+                override fun onCancelled(databaseError: DatabaseError) {
+
+                }
+            }
+            databaseReferenceToCategory.child("0"+(
+
+                    position+1).toString()).addListenerForSingleValueEvent(postListener)
         }
 
         val postListener=object : ValueEventListener
@@ -98,12 +118,18 @@ class MenuFragment : Fragment()
 
             }
         }
-        databaseReference.addListenerForSingleValueEvent(postListener)
+        databaseReferenceToFoods.addListenerForSingleValueEvent(postListener)
 
 
 
 
 
         return root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle)
+    {
+        super.onSaveInstanceState(outState)
+
     }
 }

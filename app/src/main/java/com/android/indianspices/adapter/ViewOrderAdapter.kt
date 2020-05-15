@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import androidx.recyclerview.widget.RecyclerView
 import com.android.indianspices.R
+import com.android.indianspices.common.Constants
 import com.android.indianspices.model.Food
 import com.android.indianspices.model.Orders
 import com.android.indianspices.model.Request
@@ -54,10 +55,10 @@ class  ViewOrderAdapter(private  var viewOrderList:List<Request> ): RecyclerView
     override fun onBindViewHolder(holder: ViewOrderViewHolder, position: Int)
     {
         val request=viewOrderList[position]
-        holder.requestID.text=request.requestID
+        holder.requestID.text="#"+request.requestID
         holder.date.text=request.dateTime.toString()
-        holder.status.text=request.status.toString()
-        holder.totalcost.text=request.total.toString()
+        holder.status.text=Constants.mapFoodStatusCodeToFoodStatusText.get(request.status.toString())?.toUpperCase()
+        holder.totalcost.text="$"+request.total?.toDouble()
         holder.requestedFood.visibility=View.GONE
 
         var orders=ArrayList<Orders>()

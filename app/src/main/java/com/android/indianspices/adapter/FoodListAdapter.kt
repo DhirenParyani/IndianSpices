@@ -51,9 +51,14 @@ class  FoodListAdapter(private  var foodList:List<Food> ): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: FoodListViewHolder, position: Int)
     {
         val food=foodList[position]
-        Picasso.get().load(food.image).error(R.drawable.chef_image).placeholder(R.drawable.chef_image).into(holder.foodThumbnail)
+        if(!food.image.isNullOrEmpty())
+        {
+            Picasso.get().load(food.image).error(R.drawable.chef_image)
+                .placeholder(R.drawable.chef_image).into(holder.foodThumbnail)
+        }
+        else  Picasso.get().load(R.drawable.chef_image).into(holder.foodThumbnail)
          holder.foodName.text=food.name
-        holder.foodPrice.text=food.price
+        holder.foodPrice.text="$"+food.price
 
         holder.foodThumbnail.setOnClickListener(View.OnClickListener {view->
 

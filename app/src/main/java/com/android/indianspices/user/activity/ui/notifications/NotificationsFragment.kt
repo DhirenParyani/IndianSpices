@@ -1,6 +1,7 @@
 package com.android.indianspices.user.activity.ui.notifications
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+
 import androidx.navigation.Navigation
 import com.android.indianspices.LoginActivity
 import com.android.indianspices.R
@@ -43,24 +44,26 @@ class NotificationsFragment : Fragment()
         val logoutButton: Button = root.findViewById(R.id.logoutButton)
         val textHeader: TextView = root.findViewById(R.id.text_header)
         val currentOrdersButton: Button = root.findViewById(R.id.current_orders_button)
+        val pastOrdersButton: Button = root.findViewById(R.id.past_orders_button)
         val updateProfileButton:Button=root.findViewById(R.id.edit_account_button)
+        val contactUsButton:Button=root.findViewById(R.id.contact_us)
         var phoneNumber:String?=null
 
-        currentOrdersButton.setOnClickListener { view ->
+        pastOrdersButton.setOnClickListener { view ->
 
-           val onViewOrderCheck= NotificationsFragmentDirections.actionNavigationNotificationsToNavigationViewOrders()
-            onViewOrderCheck.setPhoneNumber(phoneNumber.toString())
-            Navigation.findNavController(view).navigate(onViewOrderCheck)
+            Navigation.findNavController(view).navigate(R.id.navigation_completed_view_orders)
+
+
+        }
+
+        currentOrdersButton.setOnClickListener { view ->
+            Navigation.findNavController(view).navigate(R.id.navigation_view_orders)
+
 
 
         }
         updateProfileButton.setOnClickListener { view ->
-            /*var updateProfileFragment: UpdateProfileFragment = UpdateProfileFragment()
 
-            var fragmentTransaction: FragmentTransaction =
-                (view.context as HomeScreenActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment, updateProfileFragment)
-            fragmentTransaction.commit()*/
             Navigation.findNavController(view).navigate(R.id.navigation_profile_update)
         }
 
@@ -68,6 +71,12 @@ class NotificationsFragment : Fragment()
                 FirebaseAuth.getInstance().signOut()
                 val i = Intent(activity, LoginActivity::class.java)
                 startActivity(i)
+
+            }
+        contactUsButton.setOnClickListener { _ ->
+                val emailIntent = Intent(Intent.ACTION_SENDTO)
+                emailIntent.data = Uri.parse("mailto:sunny.paryani@gmail.com,ajinkyad13@gmail.com")
+                startActivity(Intent.createChooser(emailIntent, "Send Feedback"))
 
             }
 

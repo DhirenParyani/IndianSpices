@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.android.indianspices.R
 import com.android.indianspices.database.AppDatabase
@@ -32,7 +33,7 @@ class FoodCartViewHolder(view: View): RecyclerView.ViewHolder(view)
 
 }
 
-class  FoodCartAdapter(private  var foodCartList:List<Orders> ): RecyclerView.Adapter<FoodCartViewHolder>(){
+class  FoodCartAdapter(private  var foodCartList:MutableList<Orders> ): RecyclerView.Adapter<FoodCartViewHolder>(){
 
     val databaseReference = FirebaseDatabase.getInstance().getReference("Foods")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodCartViewHolder
@@ -52,46 +53,61 @@ class  FoodCartAdapter(private  var foodCartList:List<Orders> ): RecyclerView.Ad
 
     override fun onBindViewHolder(holder: FoodCartViewHolder, position: Int)
     {
-        val order=foodCartList[position]
-        holder.foodQty.text=order.quantity
+        var isRecordDeleted = true
+        val order = foodCartList[position]
 
-        val postListener=object : ValueEventListener
+
+        val postListener = object : ValueEventListener
         {
             override fun onDataChange(dataSnapshot: DataSnapshot)
             {
                 var food = dataSnapshot.getValue(Food::class.java)
 
-                holder.foodName.text=food?.name
-                holder.foodPrice.text=food?.price
-
-
+                holder.foodName.text = food?.name
+                holder.foodPrice.text = food?.price
+                holder.foodQty.text = order.quantity
+                isRecordDeleted = false
 
 
             }
-            override fun onCancelled(databaseError: DatabaseError) {
+
+            override fun onCancelled(databaseError: DatabaseError)
+            {
+
 
             }
         }
-        databaseReference.child(order.productID.toString()).addListenerForSingleValueEvent(postListener)
 
-        holder.requestDelete.setOnClickListener(View.OnClickListener {view->
+        databaseReference.child(order.productID.toString())
+            .addListenerForSingleValueEvent(postListener)
+
+        holder.requestDelete.setOnClickListener(View.OnClickListener { view ->
 
             GlobalScope.launch {
                 val db = AppDatabase.getInstance(view.context)
                 val databaseAccess = db?.orderDao()
 
-                    databaseAccess?.delete(order)
+                databaseAccess?.delete(order)
                 GlobalScope.launch(Dispatchers.Main) {
                     var dashboardFragment: DashboardFragment = DashboardFragment()
-                    var fragmentTransaction: FragmentTransaction = (view?.context as HomeScreenActivity).supportFragmentManager.beginTransaction().replace(R.id.fragment_dashboard,dashboardFragment)
+                    var fragmentTransaction: FragmentTransaction =
+                        (view?.context as HomeScreenActivity).supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_dashboard, dashboardFragment)
                     fragmentTransaction.commit()
-               }
+                }
 
             }
+
 
         })
 
 
 
+
     }
+
+
+
+
+
 }

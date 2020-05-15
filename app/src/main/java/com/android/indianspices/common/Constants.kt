@@ -11,8 +11,18 @@ class Constants
         var username:String?=null
         var userphone:String?=null
         var userEmail:String?=null
+        val mapFoodStatusCodeToFoodStatusText = mapOf("0" to "Order Placed", "1" to "Order Preparing" , "2" to "Order Completed")
+         val DUPLICATE_USER_MESSAGE = "User with this email already exist."
+         val USERS_KEY = "users"
+         val REQUIRED_FIELDS_MESSAGE = "All fields are required"
+         val EMAIL_KEY = "email"
+         val PASSWORD_KEY = "password"
+         val PASSWORD_LENGTH_MESSAGE = "Password must be at least 6 chars long"
 
 
     }
+
+
+
 
 }

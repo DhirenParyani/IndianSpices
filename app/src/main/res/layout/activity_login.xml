@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/chef_image" />
+        app:srcCompat="@drawable/chef_image"
+        android:contentDescription="TODO" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailAddressText"
@@ -38,11 +39,10 @@
             android:layout_height="match_parent"
             android:backgroundTint="#FFFFFF"
             android:ems="10"
-            android:hint="Email Address"
+            android:hint="@string/email_address_label"
             android:inputType="textEmailAddress"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            />
+            android:textColorHint="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordText"
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:backgroundTint="#FFFFFF"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF" />
@@ -72,7 +72,7 @@
         android:layout_width="180dp"
         android:layout_height="35dp"
         android:background="@drawable/button_style"
-        android:text="Login"
+        android:text="@string/login_title"
         app:layout_constraintTop_toBottomOf="@+id/passwordText"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,9 +85,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:background="@android:color/transparent"
-        android:text="New here? Sign Up"
+        android:text="@string/new_here_sign_up_text"
         android:textColor="#FFFFFF"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"

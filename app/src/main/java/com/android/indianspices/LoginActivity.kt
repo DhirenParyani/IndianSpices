@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.android.indianspices.common.Constants
 import com.android.indianspices.model.User
 import com.android.indianspices.user.activity.HomeScreenActivity
+import com.android.indianspices.user.activity.VendorHomeScreenActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,7 +31,7 @@ class LoginActivity : AppCompatActivity()
         }
        loginButton.setOnClickListener {_->
 
-            if(!loginEmailAddressText.text.toString().isNullOrEmpty() && !loginPasswordText.text.toString().isNullOrEmpty())
+            if((!loginEmailAddressText.text.toString().isNullOrEmpty()) && (!loginPasswordText.text.toString().isNullOrEmpty()))
             {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(loginEmailAddressText.text.toString(), loginPasswordText.text.toString())
                     .addOnCompleteListener(this) {task->
@@ -72,10 +73,13 @@ class LoginActivity : AppCompatActivity()
                         }
 
                         else{
-                            Toast.makeText(this, "Login unsuccessful", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, "Login unsuccessful", Toast.LENGTH_SHORT).show()
                         }
 
                     }
+            }
+           else {
+                Toast.makeText(this, "Login unsuccessful: Empty Credentials-", Toast.LENGTH_SHORT).show()
             }
        }
 
@@ -94,7 +98,7 @@ class LoginActivity : AppCompatActivity()
 
     fun openVendorHomeScreen()
     {
-//        //var intent=Intent(this,VendorHomeScreenActivity::class.java)
+        var intent=Intent(this, VendorHomeScreenActivity::class.java)
         startActivity(intent)
         finish()
     }

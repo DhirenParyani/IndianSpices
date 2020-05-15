@@ -13,7 +13,7 @@ public final class Orders(@ColumnInfo(name = "product_id")var productID: String?
 
     override fun toString(): String
     {
-        return "$productName \t Qty=$quantity \t price=$$price"
+        return "$productName \t Qty:"+" "+"$quantity \t price:"+" "+"$$price"
     }
 
 
