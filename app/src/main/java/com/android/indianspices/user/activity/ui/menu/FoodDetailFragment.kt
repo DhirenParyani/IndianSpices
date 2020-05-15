@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 
 import com.android.indianspices.R
+import com.android.indianspices.common.Constants
 import com.android.indianspices.database.AppDatabase
 import com.android.indianspices.model.Food
 import com.android.indianspices.model.Orders
@@ -44,6 +45,27 @@ class FoodDetailFragment : Fragment()
             isArgumentPresent=true
 
         }
+        val postListenerForFoodId = object : ValueEventListener
+        {
+            override fun onDataChange(dataSnapshot: DataSnapshot)
+            {
+                Constants.foodListIds.clear()
+                for(child in dataSnapshot.children)
+                {
+                    Constants.foodListIds.add(child.key.toString())
+                }
+
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError)
+            {
+
+
+            }
+        }
+
+        databaseReference.addListenerForSingleValueEvent(postListenerForFoodId)
 
         var foodImage:ImageView=root.findViewById(R.id.img_food)
         var foodName:TextView=root.findViewById(R.id.foodNameText)

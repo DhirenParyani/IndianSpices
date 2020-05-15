@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.indianspices.R
 import com.android.indianspices.adapter.CategoryListAdapter
+import com.android.indianspices.common.Constants
 import com.android.indianspices.model.FoodCategory
 import com.android.indianspices.user.activity.HomeScreenActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -38,13 +39,34 @@ class HomeFragment : Fragment()
         firebaseAuth=FirebaseAuth.getInstance()
 
         var categoryList=ArrayList<FoodCategory>()
+        val databaseReferenceForFood = FirebaseDatabase.getInstance().getReference("Foods")
 
 
         val categoryListView:RecyclerView=root.findViewById(R.id.recycler_category)
         categoryListView.layoutManager= LinearLayoutManager(this.activity,LinearLayoutManager.VERTICAL,false)
         var categoryListAdapter=CategoryListAdapter(categoryList)
         categoryListView.adapter=categoryListAdapter
+        val postListenerForFoodId = object : ValueEventListener
+        {
+            override fun onDataChange(dataSnapshot: DataSnapshot)
+            {
+                Constants.foodListIds.clear()
+                for(child in dataSnapshot.children)
+                {
+                   Constants.foodListIds.add(child.key.toString())
+                }
 
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError)
+            {
+
+
+            }
+        }
+
+        databaseReferenceForFood.addListenerForSingleValueEvent(postListenerForFoodId)
 
 
 

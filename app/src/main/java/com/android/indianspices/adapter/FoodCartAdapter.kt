@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.android.indianspices.R
+import com.android.indianspices.common.Constants
 import com.android.indianspices.database.AppDatabase
 import com.android.indianspices.model.Food
 import com.android.indianspices.model.Orders
@@ -57,6 +58,9 @@ class  FoodCartAdapter(private  var foodCartList:MutableList<Orders> ): Recycler
         val order = foodCartList[position]
 
 
+
+
+
         val postListener = object : ValueEventListener
         {
             override fun onDataChange(dataSnapshot: DataSnapshot)
@@ -66,7 +70,7 @@ class  FoodCartAdapter(private  var foodCartList:MutableList<Orders> ): Recycler
                 holder.foodName.text = food?.name
                 holder.foodPrice.text = food?.price
                 holder.foodQty.text = order.quantity
-                isRecordDeleted = false
+
 
 
             }
@@ -100,6 +104,22 @@ class  FoodCartAdapter(private  var foodCartList:MutableList<Orders> ): Recycler
 
 
         })
+
+        if(!Constants.foodListIds.contains(order.productID))
+        {
+            GlobalScope.launch {
+                val db = AppDatabase.getInstance(holder.itemView.context)
+                val databaseAccess = db?.orderDao()
+
+                databaseAccess?.delete(order)}
+            foodCartList.remove(order)
+
+
+
+
+
+        }
+
 
 
 

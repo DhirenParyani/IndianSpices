@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.indianspices.R
 import com.android.indianspices.adapter.FoodListAdapter
+import com.android.indianspices.common.Constants
 import com.android.indianspices.model.Food
 import com.android.indianspices.model.FoodCategory
 import com.google.firebase.auth.FirebaseAuth
@@ -44,6 +45,28 @@ class MenuFragment : Fragment()
         foodListRecyclerView.adapter=foodListAdapter
         var isArgumentPresent=false
         var position:Int=0
+        val postListenerForFoodId = object : ValueEventListener
+        {
+            override fun onDataChange(dataSnapshot: DataSnapshot)
+            {
+                Constants.foodListIds.clear()
+                for(child in dataSnapshot.children)
+                {
+                    Constants.foodListIds.add(child.key.toString())
+                }
+
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError)
+            {
+
+
+            }
+        }
+
+        databaseReferenceToFoods.addListenerForSingleValueEvent(postListenerForFoodId)
+
        /* if(this.arguments!=null)
         {
             position=arguments!!.getInt("position")

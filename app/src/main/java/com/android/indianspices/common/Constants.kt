@@ -18,6 +18,7 @@ class Constants
          val EMAIL_KEY = "email"
          val PASSWORD_KEY = "password"
          val PASSWORD_LENGTH_MESSAGE = "Password must be at least 6 chars long"
+        var foodListIds=ArrayList<String>()
 
 
     }

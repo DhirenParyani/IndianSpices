@@ -36,7 +36,7 @@ class SignUpActivity : AppCompatActivity()
             }
             else if(textEmail.text?.trim().toString().isNullOrEmpty())
             {
-                textEmail.error = "Number cannot be empty"
+                textEmail.error = "Email cannot be empty"
                 textEmail.requestFocus()
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail.text?.trim()).matches()) {
@@ -49,8 +49,8 @@ class SignUpActivity : AppCompatActivity()
 
             }
             else if (textNumber.text?.trim().toString().length < 10) {
-                textPassword.setError("Phone number cannot be less than 10 digits");
-                textPassword.requestFocus();
+                textNumber.setError("Phone number cannot be less than 10 digits");
+                textNumber.requestFocus();
 
             }
             else registerUser()

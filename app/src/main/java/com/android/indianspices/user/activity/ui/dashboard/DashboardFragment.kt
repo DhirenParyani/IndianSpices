@@ -63,15 +63,15 @@ class DashboardFragment : Fragment()
         val database = FirebaseDatabase.getInstance()
         val listOfFoodIds=ArrayList<String>()
         val databaseReferenceToFood=database.getReference("Foods")
-      /*  val postListener = object : ValueEventListener
+        val postListenerForFoodId = object : ValueEventListener
         {
             override fun onDataChange(dataSnapshot: DataSnapshot)
             {
+                Constants.foodListIds.clear()
                 for(child in dataSnapshot.children)
                 {
-                      listOfFoodIds.add(dataSnapshot.key.toString())
+                    Constants.foodListIds.add(child.key.toString())
                 }
-
 
 
             }
@@ -82,8 +82,8 @@ class DashboardFragment : Fragment()
 
             }
         }
-*/
-        //databaseReferenceToFood.addValueEventListener(postListener)
+
+        databaseReferenceToFood.addListenerForSingleValueEvent(postListenerForFoodId)
         val userId = FirebaseAuth.getInstance().uid
         var placeOrderButton: Button = root.findViewById(R.id.placeorderbutton)
         val foodCartRecyclerView: RecyclerView = root.findViewById(R.id.recycler_foodCart)

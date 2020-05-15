@@ -30,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
         {
             override fun migrate(database: SupportSQLiteDatabase)
             {
-                database.execSQL("ALTER TABLE User " + " ADD COLUMN middle_name TEXT")
+                database.execSQL("ALTER TABLE 'order_detail' " + " ADD COLUMN price TEXT")
             }
         }
         fun getInstance(context: Context): AppDatabase? {
