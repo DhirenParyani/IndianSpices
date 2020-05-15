@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.icu.text.DecimalFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 import java.math.BigDecimal
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -107,15 +109,12 @@ class DashboardFragment : Fragment()
             for (order in foodCartList)
             {
 
-
                 total += order.price.toString().toDouble() * order.quantity.toString().toDouble()
-
-
-
 
             }
             GlobalScope.launch(Dispatchers.Main) {
-                totalValue.text = total.toString()
+                val decimalFormat:DecimalFormat=DecimalFormat("#0.00")
+                totalValue.text = decimalFormat.format(total).toString()
                 foodCartAdapter.notifyDataSetChanged()
                 val intent = Intent(activity, PayPalService::class.java)
                 intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)

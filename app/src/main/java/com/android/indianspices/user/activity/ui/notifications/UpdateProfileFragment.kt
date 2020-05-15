@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.android.indianspices.R
 import com.android.indianspices.common.Constants
 import com.android.indianspices.model.User
@@ -48,6 +49,8 @@ class UpdateProfileFragment : Fragment()
               editName.clearFocus()
             Constants.username=editName.text.toString()
             databaseReference.child(userId!!).child("name").setValue(editName.text.toString())
+            Toast.makeText(root.context, "Name Successfully Edited", Toast.LENGTH_SHORT).show()
+
 
         }
 
